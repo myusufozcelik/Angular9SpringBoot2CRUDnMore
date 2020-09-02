@@ -1,0 +1,67 @@
+
+<div class="md-3">
+
+    <h3 style="text-align: center;">User Detail</h3>
+
+    <div *ngIf="user">
+
+        <form [formGroup]="detailsForm" (ngSubmit)="save(user.id)">
+
+            <div class="form-group" >
+                <label for="formGroupExampleInput">User Id</label>
+                <input type="text" disabled class="form-control" id="formGroupExampleInput"  value="{{user.id}}"  >
+              </div>
+
+
+            <div class="form-group">
+              <label for="formGroupExampleInput">First Name</label>
+            <input [attr.disabled]="!isLoggedIn() ? false : null"  type="text" class="form-control" id="formGroupExampleInput" formControlName="firstName" autocomplete="off" value="{{user.firstName}}"  required >
+            </div>
+      
+            <div class="form-group">
+              <label for="formGroupExampleInput">Last Name</label>
+              <input [attr.disabled]="!isLoggedIn() ? false : null" type="text" class="form-control" id="formGroupExampleInput" formControlName="lastName" autocomplete="off" required  value="{{user.lastName}}" >
+            </div>
+
+            <div class="form-group">
+              <label for="gender"> Gender</label>
+              <select [attr.disabled]="!isLoggedIn() ? false : null" class="form-control" formControlName="gender" name="gender" id="gender" required >
+                  <option selected value="user.gender">{{user.gender}}</option>
+                  <option *ngFor="let gender of genders">{{gender.name}}</option>
+              </select>
+      </div>
+         
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select [attr.disabled]="!isLoggedIn() ? false : null" class="form-control" formControlName="country"  name="country" id="country" required >
+                <option selected value="user.country">{{user.country}}</option> 
+                <option *ngFor="let country of countries" >{{country.country}}</option>
+      
+              </select>
+      
+              </div>
+
+
+              <!-- <button class="button" (click)="backToTheUsersList()" style="vertical-align:middle"><span>Turn Back </span></button> -->
+
+              <br>
+              <div *ngIf="!isLoggedIn();else addButton" class="alert alert-primary" style="text-align: center ;" role="alert">
+                If you want to make changes please login!
+              </div>
+                <ng-template #addButton>
+                  <button type="submit" [disabled]="!detailsForm.valid" class= "btn btn-primary btn-lg btn-block">Save</button>
+                </ng-template>
+                
+
+          </form>
+          
+         
+         
+            
+</div>
+
+</div>
+
+
+
+

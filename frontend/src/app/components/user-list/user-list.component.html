@@ -1,0 +1,96 @@
+
+<div class="container mt-2" style="padding-bottom: 15px;" >
+    <input class="form-control" id="userName" type="text" placeholder="Search" aria-label="Search" autocomplete="off" [(ngModel)]="filterText">
+    </div>
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="container md-5 mb-4 ml-0" style="height: 5px; width: 30%;">
+        <div class="dropdown">
+
+          <select class="form-control"
+                  [(ngModel)]="gender">
+              
+            <option selected value="">All</option>      
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            
+          </select>
+        </div>  
+      </h1>
+      <div class="btn-toolbar mb-3 mb-md-0">
+        <div class="btn-group mr-2">
+    
+     <button type=button class="btn btn-info" routerLink="//add-reactive">
+      <svg class="bi bi-person-plus-fill" Fwidth="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+        <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
+      </svg>
+      Reactive
+    </button>
+        </div>
+        <button type=button class="btn btn-success" routerLink="//add-template">
+          Template
+          <svg class="bi bi-person-plus-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
+          </svg>
+        </button>
+
+      </div>
+    </div>
+
+
+<table class="table table-hover" id="userTable">
+    <thead class="thead-dark">
+      <tr class="table table-hover table-info ">
+        <th scope="col">#</th>
+        <th scope="col">Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Country</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of users | userSearch:filterText | userFilter:gender ;  let i = index" >
+      <tr [class.male]="user.gender=='Male'" [class.female]="user.gender=='Female'" [class.notPrefer]="user.gender=='Prefer not to disclose'" (dblclick)="userDetail($event, user.id)" style="padding: 25px;" >
+          <td class="align-middle"><span>{{i+1}}</span></td>
+          <td class="align-middle"><span>{{user.id}}</span></td>
+        <td class="align-middle"><span>{{user.firstName}}</span></td>
+        <td class="align-middle"><span>{{user.lastName}}</span></td>
+        <td class="align-middle"><span>{{user.country}}</span></td>
+        <td class="align-middle">
+
+          
+            <button *ngIf="isLoggedIn()" class="btn btn-danger btn-sm rounded-1" (click)="deleteUser(user.id)" type="button"  data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button> 
+          <ng-template #show>
+             <button class="btn btn-danger btn-sm rounded-1" type="button" disabled data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i>
+            <script>
+              
+            </script></button> 
+          </ng-template>
+        </td>
+        <td class="align-middle">
+            <button class="btn btn-success btn-sm rounded-0" (click)="userDetail(null,user.id)"  type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+    
+  </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>

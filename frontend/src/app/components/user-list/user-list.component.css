@@ -1,0 +1,29 @@
+.male {
+   background-color: rgb(204, 242, 255);
+
+}
+.male:hover {
+  border: 1.8px solid rgb(42, 42, 65);
+  color: black;
+  opacity: 0.9;
+}
+.female {
+    
+    background-image: linear-gradient(pink,pink)
+
+}
+.female:hover {
+    border: 1.8px solid rgb(42, 42, 65);
+    color: black;
+    opacity: 0.9;
+}
+
+.notPrefer {
+    opacity: 0.9;
+    background-image: linear-gradient(red, yellow, green);
+}
+.notPrefer:hover {
+    border: 1.8px solid rgb(42, 42, 65);
+    color: black;
+    opacity: 0.9;
+}

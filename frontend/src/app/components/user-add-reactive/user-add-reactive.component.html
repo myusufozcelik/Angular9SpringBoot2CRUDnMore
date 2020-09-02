@@ -1,0 +1,45 @@
+<h3>Add New Person with Reactive Form</h3>
+
+<form [formGroup] ="userAddForm" (ngSubmit)="add()">
+    <div class="form-group">
+
+        <input type="text" placeholder="First Name" formControlName="firstName"  autocomplete="off" name="firstName" id="firstName" class="form-control" required>
+        
+        <div class="alert alert-danger" *ngIf="userAddForm.get('firstName').hasError('required') && userAddForm.get('firstName').dirty">Please enter the Person's first name</div>
+
+    </div>
+
+    <div class="form-group">
+
+        <input type="text" placeholder="Last Name" formControlName="lastName"  autocomplete="off" name="lastName" id="lastName" class="form-control" required>
+        
+        <div class="alert alert-danger" *ngIf="userAddForm.get('lastName').hasError('required') && userAddForm.get('lastName').dirty">Please enter the Person's last name</div>
+
+    </div>
+
+    <div class="form-group">
+            <select class="form-control"formControlName="gender" name="gender" id="gender" required >
+                <option selected  value="" >Choose gender...</option>
+                <option *ngFor="let gender of genders">{{gender.name}}</option>
+            </select>
+            <div *ngIf="userAddForm.get('gender').hasError('required') && userAddForm.get('gender').touched" class="alert alert-danger">Please select your gender</div>
+    </div>
+
+     
+
+    <div class="form-group">
+        <select class="form-control" formControlName="country" name="country" id="country" required>
+            <option selected value="" >Choose country...</option>
+            <option *ngFor="let country of countries">{{country.country}}</option>
+
+        </select>
+
+        <div *ngIf="userAddForm.get('country').hasError('required') && userAddForm.get('country').touched" class="alert alert-danger">Please select your country</div>
+
+</div>
+
+
+    <button type="submit" class="btn btn-primary" [disabled]="userAddForm.invalid">Add Person</button>
+
+
+</form>
